@@ -3,6 +3,7 @@ const ceils = document.querySelectorAll('.ceil')
 const currentPlayer = document.querySelector('.current-player')
 const resetButton = document.querySelector('#reset')
 let counter = 0;
+let winner = '';
 
 const ceilListener = (e) => {
     addSymbol(e);
@@ -34,9 +35,10 @@ const checkWin = (e) => {
         if (combination.every(item => ceils[item].textContent === e.target.textContent)) {
             currentPlayer.textContent = `${e.target.textContent} win`
             combination.forEach(item => ceils[item].classList.add('win'))
+            winner = e.target.textContent;
             table.removeEventListener('click', ceilListener)
         }
-        else if(counter > 8) {
+        else if(counter > 8 && !winner) {
             currentPlayer.textContent = `it's a draw game`
             table.removeEventListener('click', ceilListener)
         }
