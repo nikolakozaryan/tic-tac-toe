@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap');
+
+:root {
+    --title-font: 400 40px 'Quicksand', sans-serif;
+    --interactive-font: 300 32px 'Quicksand', sans-serif;
+    --ceil-font: 700 64px 'Quicksand', sans-serif;
+    --main-color: #7fffd4;
+}
+
+body {
+    background-color: #fff8f0;
+}
+
 .app-wrapper {
     height: 100vh;
     display: flex;
@@ -8,28 +21,76 @@
 .field-wrapper {
     width: 1200px;
     height: 100%;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
+    align-items: center; */
 }
 
 .game-table {
-    width: 480px;
-    height: 480px;
+    margin: 80px auto 0;
+    width: 500px;
+    height: 500px;
     display: flex;
     flex-wrap: wrap;
+    gap: 25px;
 }
 
 .ceil {
-    border: 1px solid black;
-    width: 160px;
-    height: 160px;
+    width: calc((500px - 50px)/3);
+    height: calc((500px - 50px)/3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    background-color: var(--main-color);
+    font: var(--ceil-font);
+    transition: .3s;
+}
+
+.ceil:hover {
+    background-color: #ff747469;
+}
+
+.win {
+    background-color: #ff7474;
+}
+
+header {
+    height: 80px;
+    background-color: var(--main-color);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.win {
-    background-color: red;
+.game-header {
+    font: var(--title-font);
+    color: #130005;
+}
+
+.interactive-field {
+    width: 60%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 80px auto 0;
+}
+
+.current-player {
+    font: var(--interactive-font);
+}
+
+#reset {
+    font: var(--interactive-font);
+    border: 2px solid var(--main-color);
+    background-color: transparent;
+    padding: 10px 20px;
+    transition: .5s;
+}
+
+#reset:hover {
+    border-color: #ff747469;
+    background-color: #ff747469;
 }

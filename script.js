@@ -41,6 +41,7 @@ const checkWin = (e) => {
         else if(counter > 8 && !winner) {
             currentPlayer.textContent = `it's a draw game`
             table.removeEventListener('click', ceilListener)
+            ceils.forEach(item => item.classList.add('win'))
         }
     })
 }
