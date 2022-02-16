@@ -3,7 +3,7 @@
 :root {
     --title-font: 400 40px 'Quicksand', sans-serif;
     --interactive-font: 300 32px 'Quicksand', sans-serif;
-    --ceil-font: 700 64px 'Quicksand', sans-serif;
+    --ceil-font: 500 72px 'Quicksand', sans-serif;
     --main-color: #7fffd4;
 }
 
@@ -29,27 +29,31 @@ body {
 
 .game-table {
     margin: 80px auto 0;
-    width: 500px;
-    height: 500px;
+    width: 480px;
+    height: 480px;
     display: flex;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 15px;
 }
 
 .ceil {
-    width: calc((500px - 50px)/3);
-    height: calc((500px - 50px)/3);
+    width: 150px;
+    height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #000;
+    color: #555;
     background-color: var(--main-color);
     font: var(--ceil-font);
-    transition: .3s;
+    transition: .5s;
 }
 
 .ceil:hover {
-    background-color: #ff747469;
+    transform: scale(.95);
+}
+
+.neutral {
+    background-color: gainsboro;
 }
 
 .win {
@@ -70,10 +74,10 @@ header {
 }
 
 .interactive-field {
-    width: 60%;
-    height: 50px;
+    width: 50%;
+    height: 70px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin: 80px auto 0;
 }
@@ -83,14 +87,16 @@ header {
 }
 
 #reset {
+    letter-spacing: 2px;
     font: var(--interactive-font);
-    border: 2px solid var(--main-color);
-    background-color: transparent;
+    border: 3px solid #ff7474;
+    border-radius: 3px;
+    background-color: #ffe6e6;
     padding: 10px 20px;
     transition: .5s;
 }
 
 #reset:hover {
-    border-color: #ff747469;
-    background-color: #ff747469;
+    border-color: var(--main-color);
+    background-color: #dbfff3;
 }
