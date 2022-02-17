@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap');
+
+:root {
+    --ceil-font: 500 72px 'Quicksand', sans-serif;
+    --title-font: 400 40px 'Quicksand', sans-serif;
+    --footer-font : 500 28px 'Quicksand', sans-serif;
+    --interactive-font: 300 36px 'Quicksand', sans-serif;
+    --menu-main-font: 300 20px 'Quicksand', sans-serif;
+    --menu-large-font: 300 24px 'Quicksand', sans-serif;
+    --main-color: #7fffd4;
+}
+
+body {
+    position: relative;
+    overflow: hidden;
+    background-color: #fff8f0;
+}
+
+.app-wrapper {
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.field-wrapper {
+    width: 1200px;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.game-table {
+    width: 480px;
+    height: 480px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.ceil {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #555;
+    background-color: var(--main-color);
+    font: var(--ceil-font);
+    transition: .5s;
+}
+
+.ceil:hover {
+    transform: scale(.95);
+}
+
+.neutral {
+    background-color: gainsboro;
+}
+
+.win {
+    background-color: #ff7474;
+}
+
+header {
+    padding: 0 20px;
+    position: relative;
+    height: 80px;
+    background-color: var(--main-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-header {
+    font: var(--title-font);
+    color: #130005;
+}
+
+.sound-button {
+    position: relative;
+    width: 70px;
+    height: 70px;
+}
+
+.current-player {
+    font: var(--interactive-font);
+}
+
+#reset {
+    display: block;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    font: var(--interactive-font);
+    letter-spacing: 2px;
+    border: 3px solid #ff7474;
+    border-radius: 3px;
+    background-color: #ffe6e6;
+    transition: .5s;
+}
+
+#reset:hover {
+    border-color: var(--main-color);
+    background-color: #dbfff3;
+}
+
+/* svg {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    fill: #130005;
+    opacity: 0;
+    transition: .5s;
+}
+
+.visible {
+    opacity: 1;
+} */
+
+.settings-button {
+    position: absolute;
+    right: 20px;
+    padding: 20px;
+    width: 80px;
+    height: 80px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    fill: #130005;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.icon:hover {
+    fill: #555;
+}
+
+.overlay {
+    top: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #0000005e;
+    z-index: 1;
+    display: none;
+}
+
+.menu {
+    box-sizing: border-box;
+    position: absolute;
+    width: 400px;
+    height: 100vh;
+    top:0;
+    right: -400px;
+    background-color: #fff8f0;
+    z-index: 2;
+    transition: .5s;
+}
+
+.hide-button {
+    width: 80px;
+    height: 80px;
+    padding: 20px;
+}
+
+.hide:hover {
+    fill:#ff7474;
+}
+
+.options {
+    font: var(--menu-large-font);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.options * {
+    transition: .5s;
+}
+
+.divider {
+    height: 40px;
+    width: 1px;
+    background-color: #130005;
+}
+
+.options *:hover {
+    cursor: pointer;
+    color: #ff7474;
+}
+
+.menu header {
+    background-color: #fff8f0;
+    flex-flow: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.menu main {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.active-menu {
+    right: 0;
+}
+
+.active-overlay {
+    display: block;
+}
