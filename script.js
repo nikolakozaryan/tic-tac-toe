@@ -10,8 +10,25 @@ const settings = document.querySelector('.settings-button')
 const hide = document.querySelector('.hide')
 let counter = 0
 let winner = ''
-let isMuted = false
-let isDark = false
+let isMuted = localStorage.isMuted ? JSON.parse(localStorage.isMuted) : false
+let isDark = localStorage.isDark ? JSON.parse(localStorage.isDark) : false
+
+const preload = () => {
+    if(isMuted) {
+        document.querySelector('.volume-switch').classList.add('active-switch');
+        [clickSound, victorySound].forEach(item => item.volume = 0)
+    }
+    if(isDark) {
+        document.querySelector('.theme-switch').classList.add('active-switch')
+        const head = document.querySelector('head');
+        const dark = document.createElement('link');
+        dark.href = './assets/styles/dark.css'
+        dark.rel = 'stylesheet'
+        head.appendChild(dark)
+    };
+}
+
+preload()
 
 const ceilListener = (e) => {
     addSymbol(e);
@@ -70,6 +87,16 @@ const mute = () => {
     clickSound.volume ? [clickSound, victorySound].forEach(item => item.volume = 0) : [clickSound, victorySound].forEach(item => item.volume = 1)
 }
 
+const activateDark  = () => {
+    isDark = !isDark
+    localStorage.isDark = isDark
+    const head = document.querySelector('head');
+    const dark = document.createElement('link');
+    dark.href = './assets/styles/dark.css'
+    dark.rel = 'stylesheet'
+    isDark ? head.appendChild(dark) : head.removeChild(head.lastChild)
+}
+
 const showMenu = () => {
     overlay.classList.toggle('active-overlay')
     menu.classList.toggle('active-menu')
@@ -82,6 +109,7 @@ document.querySelectorAll('.switch').forEach(switchItem => {
     switchItem.addEventListener('click', (e) => {
         switchItem.classList.toggle('active-switch');
         if(switchItem.classList.contains('volume-switch')) mute();
+        if(switchItem.classList.contains('theme-switch')) activateDark();
     })
 })
 

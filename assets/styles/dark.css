@@ -1,0 +1,31 @@
+:root {
+    --main-light-color: #fff8f0;
+    --main-font-color: #2d2d2d;
+}
+
+body,
+.menu,
+.menu header {
+    background-color: var(--main-font-color);
+}
+
+.overlay {
+    background-color: #b5b5b585;
+}
+
+.divider {
+    background-color: var(--main-light-color);
+}
+
+.menu header {
+    background-color: var(--main-font-color);
+}
+
+.current-player,
+.menu * {
+    color: var(--main-light-color);
+}
+
+.hide {
+    fill: var(--main-light-color);
+}
