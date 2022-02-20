@@ -3,9 +3,10 @@
 :root {
     --ceil-font: 500 72px 'Quicksand', sans-serif;
     --title-font: 400 40px 'Quicksand', sans-serif;
-    --footer-font : 500 28px 'Quicksand', sans-serif;
+    --footer-font : 500 16px 'Quicksand', sans-serif;
     --interactive-font: 300 36px 'Quicksand', sans-serif;
     --menu-main-font: 300 20px 'Quicksand', sans-serif;
+    --menu-table-font: 300 20px 'Quicksand', sans-serif;
     --menu-large-font: 300 24px 'Quicksand', sans-serif;
     --main-aqua-color: #7fffd4;
     --main-light-color: #fff8f0;
@@ -20,7 +21,7 @@ body {
 }
 
 .app-wrapper {
-    height: calc(100vh - 80px);
+    height: calc(100vh - 105px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,7 +110,8 @@ header {
 }
 
 #reset:hover {
-    background-color: #ffdddd;
+    background-color: var(--danger-color);
+    color: var(--main-light-color);
 }
 
 .settings-button {
@@ -268,4 +270,64 @@ header {
 
 .settings-item-title {
     font: var(--menu-main-font);
+}
+
+.tables {
+    margin-top: 40px;
+    display: none;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid var(--main-font-color);
+    text-align: center;
+    font: var(--menu-table-font);
+}
+
+th {
+    font-weight: normal;
+}
+
+th, td {
+    padding: 3px;
+    transition: .5s;
+}
+
+h2 {
+    text-align: center;
+    margin: 15px auto;
+    font: var(--menu-main-font);
+}
+
+.active-option {
+    color: var(--danger-color);
+}
+
+footer {
+    height: 25px;
+    box-sizing: border-box;
+    text-align: right;
+    padding-right: 5px;
+    font: var(--footer-font);
+}
+
+footer span {
+    vertical-align: middle;
+}
+
+footer * {
+    color: var(--main-font-color);
+}
+
+a {
+    text-decoration: none;
+    transition: .5s;
+}
+
+a:hover {
+    color: var(--danger-color);
 }

@@ -8,27 +8,11 @@ const overlay = document.querySelector('.overlay')
 const menu = document.querySelector('.menu')
 const settings = document.querySelector('.settings-button')
 const hide = document.querySelector('.hide')
+const options = document.querySelectorAll('.settings-header, .leaderbord-header')
 let counter = 0
 let winner = ''
 let isMuted = localStorage.isMuted ? JSON.parse(localStorage.isMuted) : false
 let isDark = localStorage.isDark ? JSON.parse(localStorage.isDark) : false
-
-const preload = () => {
-    if(isMuted) {
-        document.querySelector('.volume-switch').classList.add('active-switch');
-        [clickSound, victorySound].forEach(item => item.volume = 0)
-    }
-    if(isDark) {
-        document.querySelector('.theme-switch').classList.add('active-switch')
-        const head = document.querySelector('head');
-        const dark = document.createElement('link');
-        dark.href = './assets/styles/dark.css'
-        dark.rel = 'stylesheet'
-        head.appendChild(dark)
-    };
-}
-
-preload()
 
 const ceilListener = (e) => {
     addSymbol(e);
@@ -63,12 +47,12 @@ const checkWin = (e) => {
         if (combination.every(item => ceils[item].textContent === e.target.textContent)) {
             const smb = e.target.textContent
             winner = smb;
-            currentPlayer.textContent = `${smb} won in ${smb === 'O' ? counter/2 : counter/2 + .5} steps`
+            currentPlayer.textContent = `${smb} won in ${counter} steps`
             ceils.forEach(item => item.classList.add('neutral'))
             combination.forEach(item => ceils[item].classList.add('win'))
             table.removeEventListener('click', ceilListener)
             victorySound.play()
-            addToLocalStorage(winner, smb === 'O' ? counter/2 : counter/2 + .5)
+            addToLocalStorage(winner, counter)
         }
         else if(counter > 8 && !winner) {
             currentPlayer.textContent = `It's a draw game`
@@ -113,20 +97,22 @@ document.querySelectorAll('.switch').forEach(switchItem => {
     })
 })
 
+const getStringDate = () => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    let now = new Date()
+    return `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`
+}
+
 const addToLocalStorage = (winner, steps) => {
-    if(localStorage.lastTen === undefined) {
-        localStorage.lastTen = JSON.stringify([])
-        localStorage.bestTen = JSON.stringify([])
-    }
 
     // ADD TO LAST TEN LOCAL STORAGE
     let lastBufer = JSON.parse(localStorage.lastTen);
 
     if (lastBufer.length > 9) {
         lastBufer.shift()
-        lastBufer.push({winner, steps})
+        lastBufer.push({winner, steps, date: getStringDate()})
     }
-    else lastBufer.push({winner, steps})
+    else lastBufer.push({winner, steps, date: getStringDate()})
 
     localStorage.lastTen = JSON.stringify(lastBufer)
 
@@ -134,11 +120,81 @@ const addToLocalStorage = (winner, steps) => {
     let bestBufer = JSON.parse(localStorage.bestTen);
 
     if (bestBufer.length > 9) {
-        bestBufer.push({winner, steps})
-        bestBufer.sort((a, b) => b.steps - a.steps)
+        bestBufer.push({winner, steps, date: getStringDate()})
+        bestBufer.sort((a, b) => a.steps - b.steps)
         bestBufer.pop()
     }
-    else bestBufer.push({winner, steps})
+    else bestBufer.push({winner, steps, date: getStringDate()})
 
     localStorage.bestTen = JSON.stringify(bestBufer.sort((a, b) => a.steps - b.steps))
 }
+
+const fillTables = () => {
+    const bestTable = menu.querySelector('#best')
+    const bestData = JSON.parse(localStorage.getItem('bestTen'))
+    createTableCeils(bestTable)
+
+    const bestTableRows = document.querySelectorAll('#best>tr')
+    bestTableRows.forEach((row, index) => fillTableRow(row, bestData[index]))
+
+    // const lastTable = menu.querySelector('#last')
+    // const lastData = JSON.parse(localStorage.getItem('lastTen'))
+    // createTableCeils(lastTable)
+    // const lastTableRows = document.querySelectorAll('#last>tr')
+    // lastTableRows.forEach((row, index) => fillTableRow(row, lastData[index]))
+}
+
+const createTableCeils = (table) => {
+    for(let i = 1; i <= 10; i++) {
+        const tableRow = document.createElement('tr')
+        const positionCeil = document.createElement('td')
+        positionCeil.textContent = i;
+        tableRow.appendChild(positionCeil)
+        for (let j = 0; j < 3; j++) tableRow.appendChild(document.createElement('td'))
+        table.appendChild(tableRow)
+    }
+}
+
+const fillTableRow = (row, data) => {
+    let ceils = row.childNodes;
+    for (let i = 1; i < 4; i++) {
+        ceils[i].textContent = data ? Object.values(data)[i - 1] : '' 
+    }
+}
+
+const preload = () => {
+    if(isMuted) {
+        document.querySelector('.volume-switch').classList.add('active-switch');
+        [clickSound, victorySound].forEach(item => item.volume = 0)
+    }
+    if(isDark) {
+        document.querySelector('.theme-switch').classList.add('active-switch')
+        const head = document.querySelector('head');
+        const dark = document.createElement('link');
+        dark.href = './assets/styles/dark.css'
+        dark.rel = 'stylesheet'
+        head.appendChild(dark)
+    };
+
+    if(localStorage.lastTen === undefined) {
+        localStorage.lastTen = JSON.stringify([])
+        localStorage.bestTen = JSON.stringify([])
+    }
+
+    fillTables()
+}
+
+preload()
+
+options.forEach(option => {
+    option.addEventListener('click', (e) => {
+        options.forEach(item => item.classList.toggle('active-option'))
+        if (e.target.classList.contains('settings-header')) {
+            document.querySelector('.settings').style.display = 'flex'
+            document.querySelector('.tables').style.display = 'none'
+        } else {
+            document.querySelector('.settings').style.display = 'none'
+            document.querySelector('.tables').style.display = 'block'
+        }
+    })
+})

@@ -29,3 +29,19 @@ body,
 .hide {
     fill: var(--main-light-color);
 }
+
+th, td {
+    border-color: var(--main-light-color);
+}
+
+.active-option {
+    color: var(--danger-color);
+}
+
+#reset:hover {
+    color: var(--main-font-color);
+}
+
+footer * {
+    color: var(--main-light-color);
+}
