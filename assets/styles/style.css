@@ -331,3 +331,104 @@ a {
 a:hover {
     color: var(--danger-color);
 }
+
+@media (max-width: 768px) {
+    header {
+        height: 50px;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .game-header {
+        font-size: 28px;
+    }
+    .settings-button {
+        display: block;
+        width: 50px;
+        height: 50px;
+        padding: 11px;
+    }
+    .icon {
+        width: 28px;
+        height: 28px;
+    }
+    .app-wrapper {
+        height: calc(100vh - 75px);
+    }
+    .hide-button {
+        width: 50px;
+        height: 50px;
+        padding: 13px;
+    }
+}
+
+@media (max-width: 576px) {
+    :root {
+        --footer-font : 500 14px 'Quicksand', sans-serif;
+    }
+    .current-player {
+        font-size: 28px;
+    }
+    .game-table {
+        width: 90vw;
+        height: 90vw;
+        gap: 0;
+        justify-content: space-between;
+        align-content: space-between;
+    }
+    .ceil {
+        width: 30%;
+        height: 30%;
+        font-size: 48px;
+    }
+    #reset {
+        padding: 7px 15px;
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 420px) {
+    :root {
+        --footer-font : 500 12px 'Quicksand', sans-serif;
+        --menu-main-font: 300 16px 'Quicksand', sans-serif;
+        --menu-table-font: 300 16px 'Quicksand', sans-serif;
+        --menu-large-font: 300 20px 'Quicksand', sans-serif;
+    }
+    header {
+        height: 40px;
+    }
+    .app-wrapper {
+        height: calc(100vh - 65px);
+    }
+    .game-header {
+        font-size: 20px;
+    }
+    .settings-button {
+        display: block;
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+    }
+    .icon {
+        width: 24px;
+        height: 24px;
+    }
+    #reset {
+        padding: 5px 10px;
+        border: 2px solid var(--danger-color);
+        font-size: 24px;
+    }
+    .menu {
+        width: 100%;
+    }
+    .settings-item-title {
+        align-self: center;
+    }
+    .switch {
+        transform: scale(.8);
+    }
+    .hide-button {
+        padding: 8px;
+        width: 40px;
+        height: 40px;
+    }
+}
